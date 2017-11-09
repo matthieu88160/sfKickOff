@@ -1,0 +1,4 @@
+vesperia_hello:
+    path: /hello
+    defaults: { _controller: VesperiaTrainingBundle:Training:helloWorld }
+    methods: ["GET","POST"]

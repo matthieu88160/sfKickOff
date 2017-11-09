@@ -1,0 +1,11 @@
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+    
+training:
+    resource: '@VesperiaTrainingBundle/Resources/config/routing.yml'
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    

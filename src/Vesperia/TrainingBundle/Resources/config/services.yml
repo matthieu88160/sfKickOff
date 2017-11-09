@@ -1,0 +1,50 @@
+services:       
+    vesperia.range_generator: 
+        class: Vesperia\TrainingBundle\Util\RangeGenerator
+        public: false
+      
+    vesperia.text_provider:
+        class: Vesperia\TrainingBundle\Util\Provider\TextProvider
+        arguments:
+            - "%vesperia_training.text%"
+        tags:
+            - { name: "hello_provider_listener" }
+        
+    vesperia.list_provider:
+        class: Vesperia\TrainingBundle\Util\Provider\ListProvider
+        arguments:
+            - "@vesperia.range_generator"
+            - "%vesperia_training.range.min%"
+            - "%vesperia_training.range.max%"
+        tags:
+            - { name: "hello_provider_listener" }
+            
+    vesperia.title_provider:
+        class: Vesperia\TrainingBundle\Util\Provider\TitleProvider
+        arguments:
+            - "%vesperia_training.title%"
+        tags:
+            - { name: "hello_provider_listener" }
+    
+    vesperia.connection_logger:
+        class: Vesperia\TrainingBundle\Util\Provider\ClientLogger
+        arguments:
+            - "@doctrine"
+            - "@=service('request_stack').getMasterRequest().getClientIp()"
+        tags:
+            - { name: "hello_provider_listener" }
+    
+    vesperia.hello_provider:
+        class: Vesperia\TrainingBundle\Util\HelloWorldProvider
+        public: true
+        
+    vesperia.form_provider:
+        class: Vesperia\TrainingBundle\Util\Provider\FormProvider
+        arguments:
+            - "@form.factory"
+            - "@=service('request_stack').getMasterRequest()"
+            - "@=service('doctrine').getEntityManager().getRepository('VesperiaTrainingBundle:ConnectionLog')"
+        tags:
+            - { name: "hello_provider_listener" }
+        
+      

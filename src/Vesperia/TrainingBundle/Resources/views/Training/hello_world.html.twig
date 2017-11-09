@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+{% block title %} {{ title }} {% endblock %}
+{% block body %} 
+{{ text }}
+
+<ul> 
+{% for connection in logs|default([]) %}
+	<li>{{ connection.getClientIp() }}: {{ connection.getCreatedAt()|date('Y-m-d H:i:s') }}</li>
+{% endfor %}
+</ul>
+
+{{ form(form) }}
+
+{% endblock %}

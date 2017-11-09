@@ -1,0 +1,3 @@
+vesperia_test_homepage:
+    path:     /
+    defaults: { _controller: VesperiaTestBundle:Default:index }
